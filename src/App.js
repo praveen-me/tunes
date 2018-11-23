@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
-import './App.css';
+import './scss/App.scss';
 import Nav from './components/Nav';
+import UploadFiles from './components/UploadFiles';
 
 class App extends Component {
   render() {
@@ -9,6 +10,9 @@ class App extends Component {
       <Router>
         <div>
           <Nav />
+          <Switch>
+            <UploadFiles />
+          </Switch>
         </div>
       </Router>
     );
