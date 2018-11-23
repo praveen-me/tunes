@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import './scss/App.scss';
-import Nav from './components/Nav';
+import Header from './components/Header';
 import UploadFiles from './components/UploadFiles';
 
 class App extends Component {
   render() {
     return (
       <Router>
-        <div>
-          <Nav />
+        <div className="App">
+          <Header />
           <Switch>
             <UploadFiles />
           </Switch>

@@ -1,32 +1,58 @@
+@import './reset.scss';
+@import './base.scss';
+
+//Fonts 
+@import url('https://fonts.googleapis.com/css?family=Cookie');
+@import url('https://fonts.googleapis.com/css?family=Signika:300,400,600');
+
+
+//General CSS
 .App {
-  text-align: center;
+  font-family: 'Signika', sans-serif;
+}
+//Nav
+.header {
+  background: rgba(0,0,0,0.8);
+  position: fixed;
+  top: 0;
+  display: block;
+  width: 100%;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+.logo {
+  font-size: 4.5rem;
+  font-family: 'Cookie', cursive;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+//Upload Files
+.upload-files {
+  width: 100vw;
+  height: 100vh;
+  background:linear-gradient(0deg,rgba(0,0,0,0.6   ),rgba(0,0,0,0.6)),url(../images/malte-wingen-381988-unsplash.jpg);
+  background-size: cover;
+  background-position: center;
+  color: #fff;
 }
 
-.App-link {
-  color: #61dafb;
+.input-container {
+  background-color: #0abde3;
+  position: relative;
+  color: #000;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.select-files {
+  position: absolute;
+  width: 100%;
+  top : 0;
+  left : 0;
+  bottom : 0;
+  right : 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.submit-btn {
+  background-color: #ee5253;
+  color: #fff;
+  font-weight: 300;
 }

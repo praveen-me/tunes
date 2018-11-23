@@ -21,10 +21,13 @@ class UploadFiles extends Component {
   
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <input type="file" multiple accept="audio/*"/>
-          <input type="submit" value="Submit"/>
+      <div className="upload-files">
+        <form onSubmit={this.handleSubmit} className="upload-files-form middle center">
+          <div className="input-container btn">
+            Click to upload files
+            <input type="file" className="select-files" accept="audio/*" multiple/>
+          </div>
+          <input type="submit" className="btn submit-btn" value="Submit"/>
         </form>
       </div>
     );
