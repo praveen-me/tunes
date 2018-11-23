@@ -1,5 +1,6 @@
 const initState = {
-  musicList : []
+  musicList : [],
+  currentSong : {}
 }
 
 const rootReducer = (state = initState, action) => {
@@ -8,7 +9,7 @@ const rootReducer = (state = initState, action) => {
       var obj = {
         musicList : action.data
       }
-      
+
       return {
         ...state,
         ...obj

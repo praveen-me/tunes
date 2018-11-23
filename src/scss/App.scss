@@ -26,12 +26,7 @@
 
 //Upload Files
 .upload-files {
-  width: 100vw;
-  height: 100vh;
   background:linear-gradient(0deg,rgba(0,0,0,0.6   ),rgba(0,0,0,0.6)),url(../images/malte-wingen-381988-unsplash.jpg);
-  background-size: cover;
-  background-position: center;
-  color: #fff;
 }
 
 .input-container {
@@ -55,4 +50,49 @@
   background-color: #ee5253;
   color: #fff;
   font-weight: 300;
+}
+
+.player {
+  background:linear-gradient(0deg,rgba(0,0,0,0.6   ),rgba(0,0,0,0.6)),url(../images/malte-wingen-381988-unsplash.jpg);
+}
+
+.songs-list {
+  width: 35%;
+  padding: 5rem 1rem;
+  height: 100vh;
+  background: rgba(0,0,0,0.8);
+  overflow-y: scroll;
+  position: fixed;
+}
+
+.header-container {
+  position: relative;
+}
+
+.song-list-header {
+  position: fixed;
+  background: #000;
+  width: 35%;
+  padding: 1rem 0;
+  top: 0;
+}
+
+//Song Block
+.song-block {
+  margin : 0.5rem 0;
+  padding-left: 10px;
+  font-size: 1rem;
+  font-weight: 300;
+  a {
+    color : #fff;
+    display: block;
+    padding: 0.5rem 0;
+  }
+}
+
+.song-block:hover {
+  background: #fff;
+  a {
+    color : #000
+  }
 }

@@ -16,12 +16,12 @@ class UploadFiles extends Component {
       }
     
     this.props.dispatch(addList(musicArray));
-    
+    this.props.history.push('/');
   }
   
   render() {
     return (
-      <div className="upload-files">
+      <div className="upload-files set-bg">
         <form onSubmit={this.handleSubmit} className="upload-files-form middle center">
           <div className="input-container btn">
             Click to upload files
