@@ -38,7 +38,7 @@ const rootReducer = (state = initState, action) => {
 
       return {
         ...state,
-        // currentSong : previousSong[id]
+        currentSong : nextSong[id]
       }
     }
     default : return state;

@@ -6,7 +6,8 @@ class MusicPlayer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isPlaying : true
+      isPlaying : true, 
+      musicId : this.props.currentSong.id
     }
   }
   
@@ -30,12 +31,13 @@ class MusicPlayer extends Component {
   
   handlePrevious = (e,id) => {
     e.preventDefault();
-    this.props.dispatch(setPreviousToCurrent(id))
+    this.props.dispatch(setPreviousToCurrent(this.props.currentSong.id))
   }
 
   handleNext = (e, id) => {
     e.preventDefault();
-    this.props.dispatch(setNextToCurrent(id))
+    console.log(this.state.musicId)
+    this.props.dispatch(setNextToCurrent(this.props.currentSong.id))
   }
 
   render() {
@@ -47,8 +49,8 @@ class MusicPlayer extends Component {
     return (
       <div className="player-block">
         <audio src={currentSong.src} controls="controls" autoPlay className="audio"/>
-        <div>{currentSong.file.name}</div>
-        <div className="music-player">
+        <div className="song-title">{currentSong.file.name}</div>
+        <div className="music-player" id={currentSong.id}>
           <div className="player-function">
             <a href="#" className="player-link" 
             id={currentSong.id} 
