@@ -12,4 +12,20 @@ export function addCurrentSong(song) {
     song
   }
 }
+
+export function setPreviousToCurrent(id) {
+  console.log('previous called');
+  return {
+    type : 'SET_PREVIOUS_TO_CURRENT', 
+    id
+  }
+}
+ 
+export function setNextToCurrent(id) {
+  console.log('next called', id);
+  return {
+    type : 'SET_NEXT_TO_CURRENT', 
+    id
+  }
+}
  

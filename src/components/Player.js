@@ -19,6 +19,7 @@ class Player extends Component {
   
   render() {
     const {songList, currentSong} = this.props;
+    console.log(currentSong)
     if(!songList.length) return <Redirect to="/upload"/>
     
     return (

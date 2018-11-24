@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { setPreviousToCurrent, setNextToCurrent } from '../store/actions/action';
+import {connect} from 'react-redux';
 
 class MusicPlayer extends Component {
   constructor(props) {
@@ -28,7 +30,12 @@ class MusicPlayer extends Component {
   
   handlePrevious = (e,id) => {
     e.preventDefault();
-    console.log(id);
+    this.props.dispatch(setPreviousToCurrent(id))
+  }
+
+  handleNext = (e, id) => {
+    e.preventDefault();
+    this.props.dispatch(setNextToCurrent(id))
   }
 
   render() {
@@ -43,7 +50,11 @@ class MusicPlayer extends Component {
         <div>{currentSong.file.name}</div>
         <div className="music-player">
           <div className="player-function">
-            <a href="#" className="player-link" id={currentSong.id} onClick={(e, id) => {this.handlePrevious(e, e.target.id)}}><i class="fas fa-backward"></i></a>
+            <a href="#" className="player-link" 
+            id={currentSong.id} 
+            onClick={(e, id) => {this.handlePrevious(e, e.target.id)}}>
+              <i class="fas fa-backward"></i>
+            </a>
           </div>
           {
             isPlaying ? 
@@ -57,7 +68,7 @@ class MusicPlayer extends Component {
                   
           }
           <div className="player-function">
-            <a href="#" className="player-link"><i class="fas fa-forward"></i></a>
+            <a href="#" className="player-link" id={currentSong.id} onClick={(e, id) => {this.handleNext(e, e.target.id)}}><i class="fas fa-forward"></i></a>
           </div>
         </div>
       </div>
@@ -65,4 +76,4 @@ class MusicPlayer extends Component {
   }
 }
 
-export default MusicPlayer;
+export default connect()(MusicPlayer);
