@@ -2,12 +2,25 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom'
 import SongBlock from './SongBlock';
+import MusicPlayer from './MusicPlayer';
 
 
 class Player extends Component {
+
+  handleClick = e => {
+    // e.preventDefault();
+    const audio = document.querySelector('.audio');
+    console.log('clicked')
+    console.log(audio)
+    audio.play();
+  }
+
+
+  
   render() {
-    const {songList} = this.props;
-    // if(!songList.length) return <Redirect to="/upload"/>
+    const {songList, currentSong} = this.props;
+    if(!songList.length) return <Redirect to="/upload"/>
+    
     return (
       <div className="player set-bg">
         <div className="songs-list">
@@ -18,9 +31,20 @@ class Player extends Component {
           </div>
           {
             songList && songList.map(song => (
-              <SongBlock key={song.id} song={song}/>              
+              <SongBlock key={song.src} song={song}/>      
             ))
           } 
+        </div>
+        <div className="song-player">
+          <div className="song-animation">
+
+          </div>
+          <div className="player-info">
+              {
+                currentSong.src ?  <MusicPlayer currentSong={currentSong}/> : ''
+
+              }
+          </div>
         </div>
       </div>
     );
@@ -29,7 +53,8 @@ class Player extends Component {
 
 function mapStateToProps(state) {
   return {
-    songList : state.musicList
+    songList : state.musicList,
+    currentSong : state.currentSong
   }
 }
 

@@ -10,6 +10,7 @@ class UploadFiles extends Component {
     let musicArray = []
       for(let i = 0; i < input.files.length; i++ ) {
         musicArray.push({
+          id: i,
           file : input.files[i],
           src : window.URL.createObjectURL(input.files[i])
         })

@@ -53,13 +53,13 @@
 }
 
 .player {
-  background:linear-gradient(0deg,rgba(0,0,0,0.6   ),rgba(0,0,0,0.6)),url(../images/malte-wingen-381988-unsplash.jpg);
+  background:linear-gradient(0deg,rgba(0,0,0,0.6   ),rgba(0,0,0,0.6)),url(../images/player-bg.jpeg);
 }
 
 .songs-list {
   width: 35%;
   padding: 5rem 1rem;
-  height: 100vh;
+  height: 100%;
   background: rgba(0,0,0,0.8);
   overflow-y: scroll;
   position: fixed;
@@ -75,6 +75,7 @@
   width: 35%;
   padding: 1rem 0;
   top: 0;
+  left: 0;
 }
 
 //Song Block
@@ -94,5 +95,59 @@
   background: #fff;
   a {
     color : #000
+  }
+}
+
+.song-player {
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  float: right;
+  width: 65%;
+}
+
+//Player
+audio {
+  opacity: 0;
+}
+
+.player-info {
+  position: relative;
+  bottom: 0;
+  height: 40%;
+  display: grid;
+  place-items: center;
+}
+
+.song-animation {
+  height: 60%;
+}
+
+.player-block {
+  width: 100%;
+}
+
+.music-player {
+  width: 80%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  place-content: center;
+  place-items: center;
+}
+
+.player-link {
+  color: #01332f;
+  background-color: #fff; 
+  height: 60px;
+  width: 60px;
+  font-size: 1rem;
+  display: inline-block;
+  display: grid;
+  place-content: center;
+  place-items: center;
+  border-radius: 50%;
+  &:hover {
+    background: #FF9800;
+    color: #fff;
   }
 }

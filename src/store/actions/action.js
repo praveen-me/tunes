@@ -4,4 +4,12 @@ export function addList (data) {
     data 
   }
 }
+
+export function addCurrentSong(song) {
+  console.log('song changed')
+  return {
+    type : "CURRENT_SONG",
+    song
+  }
+}
  

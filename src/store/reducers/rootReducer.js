@@ -15,6 +15,12 @@ const rootReducer = (state = initState, action) => {
         ...obj
       };
     }
+    case "CURRENT_SONG" : {
+      return {
+        ...state, 
+        currentSong : action.song
+      }
+    }
     default : return state;
   }
 }
