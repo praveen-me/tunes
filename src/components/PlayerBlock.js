@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { setPreviousToCurrent, setNextToCurrent } from '../store/actions/action';
 
-let src;
+
 
 class PlayerBlock extends Component {
   constructor(props) {
@@ -61,58 +61,59 @@ class PlayerBlock extends Component {
     this.handleVisualizer()
   }
 
-  handleVisualizer() {      
+  handleVisualizer() {    
+    console.log('visualize');
     const context = new AudioContext();
     const audio = document.querySelector('.audio');
+    console.log(audio)
     if(audio) {
       const analyser = context.createAnalyser();
-      src = '';
-      src = context.createMediaElementSource(audio);
+      let src = context.createMediaElementSource(audio);
       const canvas = document.getElementById("canvas");
-    if(canvas) {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      const ctx = canvas.getContext("2d");
+      if(canvas) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const ctx = canvas.getContext("2d");
 
-      src.connect(analyser);
-      analyser.connect(context.destination);
+        src.connect(analyser);
+        analyser.connect(context.destination);
 
-      analyser.fftSize = 256;
+        analyser.fftSize = 512;
 
-      let bufferLength = analyser.frequencyBinCount;
-      console.log(bufferLength);
-      let dataArray = new Uint8Array(bufferLength);
+        let bufferLength = analyser.frequencyBinCount;
+        console.log(bufferLength);
+        let dataArray = new Uint8Array(bufferLength);
 
-      const WIDTH = canvas.width;
-      const HEIGHT = canvas.height;
+        const WIDTH = canvas.width;
+        const HEIGHT = canvas.height;
 
-      let barWidth = (WIDTH / bufferLength) * 2.5;
-      let barHeight;
-      let x = 0;
+        let barWidth = (WIDTH / bufferLength) * 2.5;
+        let barHeight;
+        let x = 0;
 
-      function renderFrame() {
-        requestAnimationFrame(renderFrame);
+        function renderFrame() {
+          requestAnimationFrame(renderFrame);
 
-        x = 0;
+          x = 0;
 
-        analyser.getByteFrequencyData(dataArray);
+          analyser.getByteFrequencyData(dataArray);
 
-        ctx.fillStyle = "#000";
-        ctx.fillRect(0, 0, WIDTH, HEIGHT);
+          ctx.fillStyle = '#000000cc';
+          ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
-        for (let i = 0; i < bufferLength; i++) {
-          barHeight = dataArray[i];
-          
-          let r = barHeight + (25 * (i/bufferLength));
-          let g = 250 * (i/bufferLength);
-          let b = 50;
+          for (let i = 0; i < bufferLength; i++) {
+            barHeight = dataArray[i];
+            
+            let r = barHeight + (25 * (i/bufferLength));
+            let g = 250 * (i/bufferLength);
+            let b = 50;
 
-          ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
-          ctx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
+            ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
+            ctx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
 
-          x += barWidth + 1;
+            x += barWidth + 1;
+          }
         }
-      }
       renderFrame();
       }
     }
@@ -121,13 +122,13 @@ class PlayerBlock extends Component {
   render() {
     const {currentSong} = this.props;
     const {isPlaying} = this.state;
-
     return (
       <div className="song-player">
         <div className="song-animation">
           {
             currentSong.src ? <canvas id="canvas"></canvas>
-             : ''
+             : '' 
+             
           }
         </div>
         <div className="player-info">
@@ -153,12 +154,12 @@ class PlayerBlock extends Component {
                           <div className="player-function">
                             <a href="#" className="player-link" onClick={this.handlePlay}><i className="fas fa-play"></i></a>
                           </div>
-                              
                       }
                       <div className="player-function">
                         <a href="#" className="player-link" id={currentSong.id} onClick={this.handleNext}><i className="fas fa-forward"></i></a>
                       </div>
                     </div>
+                    {this.handleVisualizer()}
                   </div>
               ) : ''
             }

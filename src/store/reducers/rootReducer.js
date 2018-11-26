@@ -11,9 +11,12 @@ const rootReducer = (state = initState, action) => {
         musicList : action.data
       }
 
+      let firstItem = action.data[0]
+
       return {
         ...state,
-        ...obj
+        ...obj,
+        currentSong : firstItem
       };
     }
     case "CURRENT_SONG" : {
