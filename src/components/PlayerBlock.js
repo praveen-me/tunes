@@ -7,7 +7,8 @@ class PlayerBlock extends Component {
     super(props)
     this.state = {
       isPlaying : this.props.isPlaying, 
-      musicId : this.props.currentSong.id
+      musicId : this.props.currentSong.id,
+      currentSongSrc : this.props.currentSong.src
     }
   }
   
@@ -25,6 +26,7 @@ class PlayerBlock extends Component {
     this.setState({
       isPlaying : true
     })
+    this.handleVisualizer()
   }
 
   handlePause = e => {
@@ -34,6 +36,7 @@ class PlayerBlock extends Component {
       isPlaying : false
     })
     song.pause();
+    
   }
   
   handlePrevious = e => {
@@ -119,7 +122,7 @@ class PlayerBlock extends Component {
 
   render() {
     const {currentSong} = this.props;
-    const {isPlaying} = this.state;
+    let {isPlaying} = this.state;
 
     return (
       <div className="song-player">
@@ -127,8 +130,8 @@ class PlayerBlock extends Component {
             currentSong.src ? (
               <div className="song-animation">
                 {
-                  isPlaying ?  <img src='https://image.flaticon.com/icons/png/128/26/26805.png' className="rotate"/> :
-                  <img src='https://image.flaticon.com/icons/png/128/26/26805.png' className="rotate rotate-stop"/> 
+                  isPlaying ?  <img src='https://image.flaticon.com/icons/png/128/26/26805.png' alt="disc" className="rotate"/> :
+                  <img src='https://image.flaticon.com/icons/png/128/26/26805.png' className="rotate rotate-stop" alt="disc"/> 
                 }
                 <canvas id="canvas"></canvas>
               </div>
