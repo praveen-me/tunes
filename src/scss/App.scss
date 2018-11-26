@@ -165,4 +165,24 @@ audio {
 
 .song-animation {
   font-size: 0;
+  display: grid;
+  place-items: center;
+}
+
+.rotate {
+  height: 150px;
+  width: 150px;
+  position: absolute;
+  animation: spin 2s linear 0s infinite reverse normal;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite normal;
+}
+
+.rotate-stop {
+  animation: none
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

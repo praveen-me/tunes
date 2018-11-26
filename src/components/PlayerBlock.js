@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { setPreviousToCurrent, setNextToCurrent } from '../store/actions/action';
 
-
-
 class PlayerBlock extends Component {
   constructor(props) {
     super(props)
@@ -98,7 +96,7 @@ class PlayerBlock extends Component {
 
           analyser.getByteFrequencyData(dataArray);
 
-          ctx.fillStyle = '#000000cc';
+          ctx.fillStyle = '#2C3A47';
           ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
           for (let i = 0; i < bufferLength; i++) {
@@ -122,15 +120,22 @@ class PlayerBlock extends Component {
   render() {
     const {currentSong} = this.props;
     const {isPlaying} = this.state;
+
     return (
       <div className="song-player">
-        <div className="song-animation">
           {
-            currentSong.src ? <canvas id="canvas"></canvas>
+            currentSong.src ? (
+              <div className="song-animation">
+                {
+                  isPlaying ?  <img src='https://image.flaticon.com/icons/png/128/26/26805.png' className="rotate"/> :
+                  <img src='https://image.flaticon.com/icons/png/128/26/26805.png' className="rotate rotate-stop"/> 
+                }
+                <canvas id="canvas"></canvas>
+              </div>
+            )
              : '' 
-             
           }
-        </div>
+        
         <div className="player-info">
             {
               currentSong.src ?  (
