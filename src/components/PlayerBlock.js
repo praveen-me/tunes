@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { setPreviousToCurrent, setNextToCurrent } from '../store/actions/action';
 
+let src;
 
 class PlayerBlock extends Component {
   constructor(props) {
@@ -44,6 +45,8 @@ class PlayerBlock extends Component {
     this.setState({
       isPlaying : true
     })
+
+    this.handleVisualizer()
   }
 
   handleNext = e => {
@@ -54,36 +57,38 @@ class PlayerBlock extends Component {
     this.setState({
       isPlaying : true
     })
+
+    this.handleVisualizer()
   }
 
   handleVisualizer() {      
-    var context = new AudioContext();
+    const context = new AudioContext();
     const audio = document.querySelector('.audio');
     if(audio) {
-      var src = context.createMediaElementSource(audio);
-      var analyser = context.createAnalyser();
-
-      var canvas = document.getElementById("canvas");
+      const analyser = context.createAnalyser();
+      src = '';
+      src = context.createMediaElementSource(audio);
+      const canvas = document.getElementById("canvas");
     if(canvas) {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      var ctx = canvas.getContext("2d");
+      const ctx = canvas.getContext("2d");
 
       src.connect(analyser);
       analyser.connect(context.destination);
 
       analyser.fftSize = 256;
 
-      var bufferLength = analyser.frequencyBinCount;
+      let bufferLength = analyser.frequencyBinCount;
       console.log(bufferLength);
-      var dataArray = new Uint8Array(bufferLength);
+      let dataArray = new Uint8Array(bufferLength);
 
-      var WIDTH = canvas.width;
-      var HEIGHT = canvas.height;
+      const WIDTH = canvas.width;
+      const HEIGHT = canvas.height;
 
-      var barWidth = (WIDTH / bufferLength) * 2.5;
-      var barHeight;
-      var x = 0;
+      let barWidth = (WIDTH / bufferLength) * 2.5;
+      let barHeight;
+      let x = 0;
 
       function renderFrame() {
         requestAnimationFrame(renderFrame);
@@ -95,12 +100,12 @@ class PlayerBlock extends Component {
         ctx.fillStyle = "#000";
         ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
-        for (var i = 0; i < bufferLength; i++) {
+        for (let i = 0; i < bufferLength; i++) {
           barHeight = dataArray[i];
           
-          var r = barHeight + (25 * (i/bufferLength));
-          var g = 250 * (i/bufferLength);
-          var b = 50;
+          let r = barHeight + (25 * (i/bufferLength));
+          let g = 250 * (i/bufferLength);
+          let b = 50;
 
           ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
           ctx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
@@ -121,7 +126,7 @@ class PlayerBlock extends Component {
       <div className="song-player">
         <div className="song-animation">
           {
-            currentSong.src ? <canvas id="canvas">{this.handleVisualizer()}</canvas>
+            currentSong.src ? <canvas id="canvas"></canvas>
              : ''
           }
         </div>
