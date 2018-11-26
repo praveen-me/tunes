@@ -28,23 +28,38 @@ const rootReducer = (state = initState, action) => {
       }
     }
     case "SET_PREVIOUS_TO_CURRENT" : {
-      const previousSong = [...state.musicList];
-      const id = action.id - 1;
+      const songs = [...state.musicList];
+      const id = action.id;
+      let previousSong;
+      
+      if(id === 0) {
+        previousSong = songs[songs.length - 1]
+      } else {
+        previousSong = songs[id - 1];
+      }
+
 
       return {
         ...state,
-        currentSong : previousSong[id], 
+        currentSong : previousSong, 
         isPlaying : true
       }
     }
     case "SET_NEXT_TO_CURRENT" : {
-      const nextSong = [...state.musicList];
-      const id = action.id + 1;
-      console.log(action.id)
+      const songs = [...state.musicList];
+      const id = action.id;
+      
+      let previousSong;
+      if(id === songs.length - 1) {
+        previousSong = songs[0]
+      } else {
+        previousSong = songs[id + 1];
+      }
+
 
       return {
         ...state,
-        currentSong : nextSong[id], 
+        currentSong : previousSong, 
         isPlaying : true
       }
     }
