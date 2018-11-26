@@ -4,7 +4,6 @@ import './scss/App.scss';
 import Header from './components/Header';
 import UploadFiles from './components/UploadFiles';
 import Player from './components/Player';
-
 class App extends Component {
   render() {
     return (

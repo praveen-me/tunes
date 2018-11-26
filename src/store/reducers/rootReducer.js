@@ -1,6 +1,7 @@
 const initState = {
   musicList : [],
-  currentSong : {}
+  currentSong : {}, 
+  isPlaying : false
 }
 
 const rootReducer = (state = initState, action) => {
@@ -19,7 +20,8 @@ const rootReducer = (state = initState, action) => {
       console.log(action.song)
       return {
         ...state, 
-        currentSong : action.song
+        currentSong : action.song, 
+        isPlaying : true
       }
     }
     case "SET_PREVIOUS_TO_CURRENT" : {
@@ -28,7 +30,8 @@ const rootReducer = (state = initState, action) => {
 
       return {
         ...state,
-        currentSong : previousSong[id]
+        currentSong : previousSong[id], 
+        isPlaying : true
       }
     }
     case "SET_NEXT_TO_CURRENT" : {
@@ -38,7 +41,8 @@ const rootReducer = (state = initState, action) => {
 
       return {
         ...state,
-        currentSong : nextSong[id]
+        currentSong : nextSong[id], 
+        isPlaying : true
       }
     }
     default : return state;

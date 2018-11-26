@@ -6,11 +6,18 @@ class MusicPlayer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isPlaying : true, 
+      isPlaying : this.props.isPlaying, 
       musicId : this.props.currentSong.id
     }
   }
+
+  componentDidMount() {
+    this.setState({
+      isPlaying : true
+    })
+  }
   
+
   handlePlay = e => {
     e.preventDefault();
     const song = document.querySelector('.audio');
@@ -29,22 +36,30 @@ class MusicPlayer extends Component {
     song.pause();
   }
   
-  handlePrevious = (e,id) => {
+  handlePrevious = e => {
     e.preventDefault();
     this.props.dispatch(setPreviousToCurrent(this.props.currentSong.id))
+
+    this.setState({
+      isPlaying : true
+    })
   }
 
-  handleNext = (e, id) => {
+  handleNext = e => {
     e.preventDefault();
     console.log(this.state.musicId)
     this.props.dispatch(setNextToCurrent(this.props.currentSong.id))
+
+    this.setState({
+      isPlaying : true
+    })
   }
 
   render() {
     const {currentSong} = this.props;
-    
     const {isPlaying} = this.state;
-    console.log(currentSong)
+    console.log(isPlaying)
+    // currentSong = true;
 
     return (
       <div className="player-block">
@@ -54,23 +69,23 @@ class MusicPlayer extends Component {
           <div className="player-function">
             <a href="#" className="player-link" 
             id={currentSong.id} 
-            onClick={(e, id) => {this.handlePrevious(e, e.target.id)}}>
-              <i class="fas fa-backward"></i>
+            onClick={this.handlePrevious}>
+              <i className="fas fa-backward"></i>
             </a>
           </div>
           {
             isPlaying ? 
               <div className="player-function">
-                <a href="#" className="player-link" onClick={this.handlePause}><i class="fas fa-pause"></i></a>
+                <a href="#" className="player-link" onClick={this.handlePause}><i className="fas fa-pause"></i></a>
               </div>
                : 
               <div className="player-function">
-                <a href="#" className="player-link" onClick={this.handlePlay}><i class="fas fa-play"></i></a>
+                <a href="#" className="player-link" onClick={this.handlePlay}><i className="fas fa-play"></i></a>
               </div>
                   
           }
           <div className="player-function">
-            <a href="#" className="player-link" id={currentSong.id} onClick={(e, id) => {this.handleNext(e, e.target.id)}}><i class="fas fa-forward"></i></a>
+            <a href="#" className="player-link" id={currentSong.id} onClick={this.handleNext}><i className="fas fa-forward"></i></a>
           </div>
         </div>
       </div>
@@ -78,4 +93,10 @@ class MusicPlayer extends Component {
   }
 }
 
-export default connect()(MusicPlayer);
+function mapStateToProps(state) {
+  return {
+    isPlaying : state.isPlaying
+  }
+}
+
+export default connect(mapStateToProps)(MusicPlayer);
