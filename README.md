@@ -13,6 +13,15 @@ Live Demo - https://meri-tunes.herokuapp.com/upload
 * Then go the that directory by running `cd meri-tunes`.
 * Run the server by running `npm start`.
 
+## Problem
+This music has some issues that make this for incompitable in chrome.
+
+```
+InvalidStateError: Failed to execute 'createMediaElementSource' on 'BaseAudioContext': HTMLMediaElement already connected previously to a different MediaElementSourceNode.
+```
+So, this problem is with chrome that it binds the audio with **createMediaElementSource** and we can't change.
+So, if someone have fallback for it then they can check issue and contribute in it.
+
 ### Tech Stack Used
 * React
 * Redux
