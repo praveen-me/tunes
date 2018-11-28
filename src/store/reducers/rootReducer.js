@@ -13,9 +13,12 @@ const rootReducer = (state = initState, action) => {
 
       let firstItem = action.data[0]
 
+      const set = new Set([...state.musicList, ...action.data]);
+      console.log(set);
+
       return {
         ...state,
-        ...obj,
+        musicList : obj.musicList,
         currentSong : firstItem
       };
     }

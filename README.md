@@ -4,7 +4,7 @@ It's a simple music player where you can add your music from storage and play th
 This app uses [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) for playing song and analyzing the frequency of songs.
 Live Demo - https://meri-tunes.herokuapp.com/upload
 
-![]('./src/images/app-pic2.png')
+![]('./app-pic1.png')
 
 ![]('./src/images/app-pic2.png')
 
