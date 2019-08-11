@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {
-  setNextToCurrent,
-  changeNextandPrevSong
-} from "../store/actions/action";
+import { changeNextandPrevSong } from "../store/actions/action";
 
 class PlayerBlock extends Component {
   constructor(props) {
@@ -114,7 +111,7 @@ class PlayerBlock extends Component {
             let g = 250 * (i / bufferLength);
             let b = 50;
 
-            ctx.fillStyle = `rgb(${r},${g},{b})`;
+            ctx.fillStyle = `rgb(${r},${g},${b})`;
             ctx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
 
             x += barWidth + 1;

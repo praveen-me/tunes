@@ -19,6 +19,21 @@
   z-index: 9;
 }
 
+.toggle-list {
+  background: transparent;
+  border: none;
+  padding: 10px 0;
+  margin-left: 8px;
+  cursor: pointer;
+  position: absolute;
+  z-index: 11;
+  display: none;
+  right: 0;
+  &:focus {
+    outline: 0;
+  }
+}
+
 .logo {
   font-size: 4.5rem;
   font-family: "Cookie", cursive;
@@ -65,25 +80,17 @@
 
 .songs-list {
   width: 35%;
-  padding: 5rem 1rem;
+  padding: 1rem;
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
   overflow-y: scroll;
   position: fixed;
   z-index: 10;
+  transition: all 0.5s ease-in-out;
 }
 
 .header-container {
-  position: relative;
-}
-
-.song-list-header {
-  position: fixed;
-  background: #000;
-  width: 35%;
-  padding: 1rem 0;
-  top: 0;
-  left: 0;
+  margin-bottom: 1rem;
 }
 
 //Song Block
@@ -204,5 +211,29 @@ audio {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+// Tablet code and smaller screens
+@media screen and (max-width: 720px) {
+  .song-player {
+    width: 100%;
+  }
+
+  .songs-list {
+    width: 80%;
+    background: #000;
+  }
+
+  .songs-list.close {
+    left: -999px;
+  }
+
+  .songs-list.open {
+    left: 0;
+  }
+
+  .toggle-list {
+    display: block;
   }
 }

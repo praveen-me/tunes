@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
-import {connect} from 'react-redux'
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
 class Header extends Component {
   render() {
-    const {data} = this.props;
-    console.log(data, "data");
     return (
       <div className="header color-white">
-        <h1 className="logo center" >Tunes</h1>
+        <h1 className="logo center">Tunes</h1>
       </div>
     );
   }
@@ -15,8 +13,8 @@ class Header extends Component {
 
 function mapStateToProps(state) {
   return {
-    data : state.musicList
-  }
+    data: state.musicList
+  };
 }
 
 export default connect(mapStateToProps)(Header);
