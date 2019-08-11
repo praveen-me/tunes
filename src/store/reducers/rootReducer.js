@@ -29,19 +29,13 @@ const rootReducer = (state = initState, action) => {
 
       let currentSong;
 
-      if (isNext) {
-        if (id === songs.length - 1) {
-          currentSong = songs[0];
-        } else {
-          currentSong = songs[id + 1];
-        }
-      } else {
-        if (id === 0) {
-          currentSong = songs[songs.length - 1];
-        } else {
-          currentSong = songs[id - 1];
-        }
-      }
+      currentSong = isNext
+        ? id === songs.length - 1
+          ? songs[0]
+          : songs[id + 1]
+        : id === 0
+        ? songs[songs.length - 1]
+        : songs[id - 1];
 
       return {
         ...state,

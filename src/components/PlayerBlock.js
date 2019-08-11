@@ -135,7 +135,7 @@ class PlayerBlock extends Component {
           <div className="song-animation">
             <img
               src="https://image.flaticon.com/icons/png/128/26/26805.png"
-              className={`rotate ${!isPlaying && "rotate-stop"}`}
+              className={`rotate middle ${!isPlaying && "rotate-stop"}`}
               alt="disc"
             />
             <canvas id="canvas" />
