@@ -1,20 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
-  setPreviousToCurrent,
-  setNextToCurrent
+  setNextToCurrent,
+  changeNextandPrevSong
 } from "../store/actions/action";
 
 class PlayerBlock extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isPlaying: this.props.isPlaying,
-      musicId: this.props.currentSong.id,
-      currentSongSrc: this.props.currentSong.src
+      isPlaying: true
     };
-    this.myMap = new WeakMap();
-
     this.data = {
       context: "",
       src: ""
@@ -46,18 +42,11 @@ class PlayerBlock extends Component {
     song.pause();
   };
 
-  handlePrevious = e => {
+  handleSongChange = (e, isNext = true) => {
     e.preventDefault();
-    this.props.dispatch(setPreviousToCurrent(this.props.currentSong.id));
-
-    this.setState({
-      isPlaying: true
-    });
-  };
-
-  handleNext = e => {
-    e.preventDefault();
-    this.props.dispatch(setNextToCurrent(this.props.currentSong.id));
+    this.props.dispatch(
+      changeNextandPrevSong(this.props.currentSong.id, isNext)
+    );
 
     this.setState({
       isPlaying: true
@@ -125,7 +114,7 @@ class PlayerBlock extends Component {
             let g = 250 * (i / bufferLength);
             let b = 50;
 
-            ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
+            ctx.fillStyle = `rgb(${r},${g},{b})`;
             ctx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
 
             x += barWidth + 1;
@@ -142,29 +131,18 @@ class PlayerBlock extends Component {
 
     return (
       <div className="song-player">
-        {currentSong.src ? (
+        {currentSong.src && (
           <div className="song-animation">
-            {isPlaying ? (
-              <img
-                src="https://image.flaticon.com/icons/png/128/26/26805.png"
-                alt="disc"
-                className="rotate"
-              />
-            ) : (
-              <img
-                src="https://image.flaticon.com/icons/png/128/26/26805.png"
-                className="rotate rotate-stop"
-                alt="disc"
-              />
-            )}
+            <img
+              src="https://image.flaticon.com/icons/png/128/26/26805.png"
+              className={`rotate ${!isPlaying && "rotate-stop"}`}
+              alt="disc"
+            />
             <canvas id="canvas" />
           </div>
-        ) : (
-          ""
         )}
-
         <div className="player-info">
-          {currentSong.src ? (
+          {currentSong.src && (
             <div className="player-block">
               <audio
                 src={currentSong.src}
@@ -179,43 +157,32 @@ class PlayerBlock extends Component {
                     href="#"
                     className="player-link"
                     id={currentSong.id}
-                    onClick={this.handlePrevious}>
+                    onClick={e => this.handleSongChange(e, false)}>
                     <i className="fas fa-backward" />
                   </button>
                 </div>
-                {isPlaying ? (
-                  <div className="player-function">
-                    <button
-                      href="#"
-                      className="player-link"
-                      onClick={this.handlePause}>
-                      <i className="fas fa-pause" />
-                    </button>
-                  </div>
-                ) : (
-                  <div className="player-function">
-                    <button
-                      href="#"
-                      className="player-link"
-                      onClick={this.handlePlay}>
-                      <i className="fas fa-play" />
-                    </button>
-                  </div>
-                )}
                 <div className="player-function">
-                  <a
+                  <button
+                    href="#"
+                    className="player-link"
+                    onClick={isPlaying ? this.handlePause : this.handlePlay}>
+                    <i
+                      className={`fas ${isPlaying ? "fa-pause" : "fa-play"}`}
+                    />
+                  </button>
+                </div>
+                <div className="player-function">
+                  <button
                     href="#"
                     className="player-link"
                     id={currentSong.id}
-                    onClick={this.handleNext}>
+                    onClick={this.handleSongChange}>
                     <i className="fas fa-forward" />
-                  </a>
+                  </button>
                 </div>
               </div>
               {this.initializeVisualizer()}
             </div>
-          ) : (
-            ""
           )}
         </div>
       </div>

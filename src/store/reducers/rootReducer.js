@@ -1,73 +1,57 @@
 const initState = {
-  musicList : [],
-  currentSong : {}, 
-  isPlaying : false
-}
+  musicList: [],
+  currentSong: {},
+  isPlaying: false
+};
 
 const rootReducer = (state = initState, action) => {
-  switch(action.type) {
-    case "ADD_LIST" : {
-      var obj = {
-        musicList : action.data
-      }
-
-      let firstItem = action.data[0]
-
-      const set = new Set([...state.musicList, ...action.data]);
-      console.log(set);
-
+  switch (action.type) {
+    case "ADD_LIST": {
+      const obj = {
+        musicList: action.data
+      };
       return {
         ...state,
-        musicList : obj.musicList,
-        currentSong : firstItem
+        musicList: obj.musicList,
+        currentSong: action.data[0]
       };
     }
-    case "CURRENT_SONG" : {
-      console.log(action.song)
+    case "CURRENT_SONG": {
       return {
-        ...state, 
-        currentSong : action.song, 
-        isPlaying : true
-      }
+        ...state,
+        currentSong: action.song,
+        isPlaying: true
+      };
     }
-    case "SET_PREVIOUS_TO_CURRENT" : {
-      const songs = [...state.musicList];
-      const id = action.id;
-      let previousSong;
-      
-      if(id === 0) {
-        previousSong = songs[songs.length - 1]
-      } else {
-        previousSong = songs[id - 1];
-      }
+    case "CHANGE_CURRENT_SONG": {
+      const songs = state.musicList;
+      const { id, isNext } = action.payload;
 
+      let currentSong;
+
+      if (isNext) {
+        if (id === songs.length - 1) {
+          currentSong = songs[0];
+        } else {
+          currentSong = songs[id + 1];
+        }
+      } else {
+        if (id === 0) {
+          currentSong = songs[songs.length - 1];
+        } else {
+          currentSong = songs[id - 1];
+        }
+      }
 
       return {
         ...state,
-        currentSong : previousSong, 
-        isPlaying : true
-      }
+        currentSong: currentSong,
+        isPlaying: true
+      };
     }
-    case "SET_NEXT_TO_CURRENT" : {
-      const songs = [...state.musicList];
-      const id = action.id;
-      
-      let previousSong;
-      if(id === songs.length - 1) {
-        previousSong = songs[0]
-      } else {
-        previousSong = songs[id + 1];
-      }
-
-
-      return {
-        ...state,
-        currentSong : previousSong, 
-        isPlaying : true
-      }
-    }
-    default : return state;
+    default:
+      return state;
   }
-}
+};
 
 export default rootReducer;
